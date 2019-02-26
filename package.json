@@ -4,7 +4,7 @@
   "description": "Cheesy CLI",
   "main": "index.js",
   "scripts": {
-    "lint": "standard --fix"
+    "lint": "standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
