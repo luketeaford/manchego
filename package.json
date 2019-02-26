@@ -4,8 +4,9 @@
   "description": "Cheesy CLI",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf coverage",
     "lint": "standard --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover tape test/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
   },
   "homepage": "https://github.com/luketeaford/manchego#readme",
   "devDependencies": {
-    "standard": "^12.0.1"
+    "istanbul": "^0.4.5",
+    "standard": "^12.0.1",
+    "tape": "^4.10.1"
   }
 }
