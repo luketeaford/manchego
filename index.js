@@ -1,5 +1,10 @@
 const slice = require('./lib/slice')
 
-const index = argv => slice(argv)
+const index = function (argv) {
+  const settings = slice(argv)
+  return {
+    settings
+  }
+}
 
 module.exports = index
