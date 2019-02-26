@@ -1,0 +1,29 @@
+{
+  "name": "manchego",
+  "version": "0.1.0",
+  "description": "Cheesy CLI",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard --fix"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luketeaford/manchego.git"
+  },
+  "keywords": [
+    "manchego",
+    "cheesy",
+    "cli",
+    "tool"
+  ],
+  "author": "Luke Teaford",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/luketeaford/manchego/issues"
+  },
+  "homepage": "https://github.com/luketeaford/manchego#readme",
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}
