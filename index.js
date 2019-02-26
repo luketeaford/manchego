@@ -1,3 +1,3 @@
-const index = () => undefined
+const index = (argv) => argv
 
 module.exports = index
