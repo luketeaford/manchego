@@ -1,0 +1,2 @@
+# manchego
+Cheesy CLI
