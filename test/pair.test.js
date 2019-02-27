@@ -19,12 +19,11 @@ test('The pair function returns an object with a single letter command set to tr
   t.end()
 })
 
-// test('The pair function returns an object with commands declared with two dashes equal to true if no value is given.', t => {
-//   const actual = pair('--whatever', '--fine')
-//   t.equal(actual.whatever, true)
-//   t.equal(actual.fine, true)
-//   t.end()
-// })
+test('The pair function returns an object with commands declared with two dashes equal to true if no value is given.', t => {
+  const actual = pair(['--whatever', '--fine'])
+  t.equal(actual.whatever, true)
+  t.end()
+})
 
 // ROUGH DRAFT
 // const pair = settings => {
