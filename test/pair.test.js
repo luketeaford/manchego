@@ -6,34 +6,37 @@ const pair = arr => {
   const objFn = setProp({})
   const obj = objFn(null, {})
 
-  const foo = x => {
+  const parseOneDash = x => {
     if (x.startsWith('-')) {
       const cmd = x.split('-')[1]
       const nextValue = arr[arr.indexOf(x) + 1]
       const isLong = cmd.length > 1
       objFn(cmd[0], {
-        value: isLong || (nextValue && nextValue.startsWith('-'))
+        value: !nextValue || (nextValue && nextValue.startsWith('-'))
           ? true
           : nextValue
       })
       if (isLong) {
-        foo(`-${cmd.slice(1)}`)
+        parseOneDash(`-${cmd.slice(1)}`)
       }
     }
   }
 
-  arr.forEach(foo)
+  // TODO It does make sense to split into one/two/zero dash functions
+  // but they have to refer to their position in the original array
+  arr.forEach(parseOneDash)
   return obj
 }
 
 test('The pair function returns an object with a single letter command set to true.', t => {
-  const actual = pair(['-a', 'apple', '-b', '-c', '-def'])
+  const actual = pair(['-a', 'apple', '-b', '-c', '-def', '-g'])
   t.equal(actual.a, 'apple')
   t.equal(actual.b, true)
   t.equal(actual.c, true)
   t.equal(actual.d, true)
   t.equal(actual.e, true)
   t.equal(actual.f, true)
+  t.equal(actual.g, true)
   t.end()
 })
 

@@ -8,5 +8,4 @@ const index = function (argv) {
 }
 
 index(process.argv)
-
 module.exports = index
