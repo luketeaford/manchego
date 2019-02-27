@@ -1,32 +1,11 @@
 const test = require('tape')
+const pair = require('../lib/pair')
 
-const setProp = obj => (n, p) => Object.defineProperty(obj, n, p)
-
-const pair = arr => {
-  const objFn = setProp({})
-  const obj = objFn(null, {})
-
-  const parseOneDash = x => {
-    if (x.startsWith('-')) {
-      const cmd = x.split('-')[1]
-      const nextValue = arr[arr.indexOf(x) + 1]
-      const isLong = cmd.length > 1
-      objFn(cmd[0], {
-        value: !nextValue || (nextValue && nextValue.startsWith('-'))
-          ? true
-          : nextValue
-      })
-      if (isLong) {
-        parseOneDash(`-${cmd.slice(1)}`)
-      }
-    }
-  }
-
-  // TODO It does make sense to split into one/two/zero dash functions
-  // but they have to refer to their position in the original array
-  arr.forEach(parseOneDash)
-  return obj
-}
+test('The pair function returns an object with a single letter command set to the space separated value that follows it.', t => {
+  const actual = pair(['-a', 'apple'])
+  t.equal(actual.a, 'apple')
+  t.end()
+})
 
 test('The pair function returns an object with a single letter command set to true.', t => {
   const actual = pair(['-a', 'apple', '-b', '-c', '-def', '-g'])
