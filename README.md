@@ -3,15 +3,13 @@ Cheesy CLI
 
 ## Design Goals
 - [x] No made-up syntax
-- [ ] Single dash options have equivalent double-dash options
-- [ ] Single dash options are separated with a space for parameter
 - [ ] Single dash options can be combined
 
-## Ways to use this
+## Usage
 ```js
-const manchego = require('manchego')
+const cli = require('manchego')
 
 // Simple destructuring
-const { src, dest, template } = manchego(process.argv)
+const { src, dest, template } = cli(process.argv)
 
 ```
