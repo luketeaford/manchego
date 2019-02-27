@@ -9,7 +9,7 @@ const pair = arr => {
   const foo = x => {
     if (x.startsWith('-')) {
       const cmd = x.split('-')[1]
-      const nextValue = arr[arr.indexOf(x) + 1]//
+      const nextValue = arr[arr.indexOf(x) + 1]
       const isLong = cmd.length > 1
       objFn(cmd[0], {
         value: isLong || (nextValue && nextValue.startsWith('-'))
@@ -26,7 +26,7 @@ const pair = arr => {
   return obj
 }
 
-test.only('The pair function returns an object with a single letter command set to true.', t => {
+test('The pair function returns an object with a single letter command set to true.', t => {
   const actual = pair(['-a', 'apple', '-b', '-c', '-def'])
   t.equal(actual.a, 'apple')
   t.equal(actual.b, true)
