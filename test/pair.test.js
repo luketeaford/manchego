@@ -41,7 +41,6 @@ test('The part function takes an array and returns a function that takes a filte
   t.end()
 })
 
-
 const pair = settings => {
   const obj = {}
   settings.forEach(cmd => {
@@ -66,4 +65,3 @@ test('The pair function breaks command line arguments into key/value pairs.', t 
   t.equal(actual.sure, true)
   t.end()
 })
-
