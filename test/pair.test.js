@@ -49,6 +49,11 @@ const pair = settings => {
       obj[splitName[0]] = splitName[1] || true
     } else {
       if (cmd.startsWith('-')) {
+        if (cmd.length > 1) {
+          for (let i = 1; i < cmd.length; i += 1) {
+            obj[cmd[i]] = true
+          }
+        }
         const nextValue = settings[settings.indexOf(cmd) + 1]
         obj[cmd.substring(1)] = nextValue.startsWith('-') ? true : nextValue
       }
@@ -63,5 +68,13 @@ test('The pair function breaks command line arguments into key/value pairs.', t 
   t.equal(actual.x, true)
   t.equal(actual.whatever, 'fine')
   t.equal(actual.sure, true)
+  t.end()
+})
+
+test('The pair function allows short commands to be combined.', t => {
+  const actual = pair(['-zRkbt', 'tomato'])
+  console.log(actual)
+  t.equal(actual.z, true)
+  t.equal(actual.R, true)
   t.end()
 })
