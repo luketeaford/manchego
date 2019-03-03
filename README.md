@@ -5,8 +5,8 @@ Cheesy CLI
 - [x] No made-up syntax
 - [x] Single dash options expect space separated values
 - [x] Single dash options can be combined
-- [ ] Double dash options expect equals sign
-- [ ] Support multiple ending arguments
+- [x] Double dash options expect equals sign
+- [] Support multiple ending arguments
 
 ## Usage
 ```js
