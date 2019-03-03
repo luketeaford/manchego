@@ -6,7 +6,7 @@ Cheesy CLI
 - [x] Single dash options expect space separated values
 - [x] Single dash options can be combined
 - [x] Double dash options expect equals sign
-- [] Support multiple ending arguments
+- [x] Support variadic arguments
 
 ## Usage
 ```js
