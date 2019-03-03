@@ -32,3 +32,9 @@ test('The pair function returns an object with commands declared with two dashes
   t.equal(actual.cheese, false)
   t.end()
 })
+
+test('The pair function returns an object with variadic arguments supported for the last parameter.', t => {
+  const actual = pair(['--count=0', '-p', 'cat', 'dog', 'bird'])
+  t.equal(actual.p, 'cat dog bird')
+  t.end()
+})
