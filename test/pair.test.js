@@ -38,3 +38,13 @@ test('The pair function returns an object with variadic arguments supported for 
   t.equal(actual.p, 'cat dog bird')
   t.end()
 })
+
+test('The pair function does not break with non-variadic arguments.', t => {
+  const actual = pair(['-s', 'sun', '-ard', '--count=2'])
+  t.equal(actual.s, 'sun')
+  t.equal(actual.a, true)
+  t.equal(actual.r, true)
+  t.equal(actual.d, true)
+  t.equal(actual.count, '2')
+  t.end()
+})
