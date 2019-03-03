@@ -1,14 +1,25 @@
 const test = require('tape')
-const index = require('../index')
+const actualIndex = require('../index')
+
+test('The index function expects to receive process.argv, so it ignores the first two items in the array.', t => {
+  const actual = actualIndex(['-a', '-b', '-c'])
+  t.equal(actual.a, undefined)
+  t.equal(actual.b, undefined)
+  t.equal(actual.c, true)
+  t.end()
+})
+
+// Adds 2 args to mimick process.argv and simplify test data
+const index = arr => actualIndex(['x', 'x', ...arr])
 
 test('The index function returns an object with a single letter command set to the space separated value that follows it.', t => {
-  const actual = index(['x', 'x', '-a', 'apple'])
+  const actual = index(['-a', 'apple'])
   t.equal(actual.a, 'apple')
   t.end()
 })
 
-test('The index function returns an object with a single letter command set to true.', t => {
-  const actual = index(['x', 'x', '-a', 'apple', '-b', '-c', '-def', '-g'])
+test('The index function returns an object containing keys matching single letter commands set to true if the value that follows it is not separated with a space. Individual parameters can be grouped if there is no argument that follows (e.g., -def is equivalent to -d -e -f).', t => {
+  const actual = index(['-a', 'apple', '-b', '-c', '-def', '-g'])
   t.equal(actual.a, 'apple')
   t.equal(actual.b, true)
   t.equal(actual.c, true)
@@ -19,32 +30,17 @@ test('The index function returns an object with a single letter command set to t
   t.end()
 })
 
-test('The index function returns an object with commands declared with two dashes equal to true if no value is given.', t => {
-  const actual = index(['x', 'x', '--whatever', '--fine=ok'])
+test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true. The string "false" is replaced with boolean false (e.g, --something=false will become a "something" key with the false boolean value).', t => {
+  const actual = index(['--whatever', '--bread=rye', '--foo', '--cheese=false'])
   t.equal(actual.whatever, true)
-  t.end()
-})
-
-test('The index function returns an object with commands declared with two dashes to the value passed on the right of the equals sign.', t => {
-  const actual = index(['x', 'x', '--bread=rye', '--foo', '--cheese=false'])
   t.equal(actual.bread, 'rye')
   t.equal(actual.foo, true)
   t.equal(actual.cheese, false)
   t.end()
 })
 
-test('The index function returns an object with variadic arguments supported for the last parameter.', t => {
-  const actual = index(['x', 'x', '--count=0', '-p', 'cat', 'dog', 'bird'])
+test('The index function returns an object with variadic arguments supported for the last single dash parameter (e.g, -t thing1 thing2 thing3 will return a "t" key with the value "thing1 thing2 thing3").', t => {
+  const actual = index(['--count=0', '-p', 'cat', 'dog', 'bird'])
   t.equal(actual.p, 'cat dog bird')
-  t.end()
-})
-
-test('The index function does not break with non-variadic arguments.', t => {
-  const actual = index(['x', 'x', '-s', 'sun', '-ard', '--count=2'])
-  t.equal(actual.s, 'sun')
-  t.equal(actual.a, true)
-  t.equal(actual.r, true)
-  t.equal(actual.d, true)
-  t.equal(actual.count, '2')
   t.end()
 })
