@@ -37,9 +37,7 @@ const index = argv => {
     const splitCmd = cmd.split('=')
 
     objFn({
-      [splitCmd[0]]: splitCmd[1]
-        ? splitCmd[1] !== 'false' && splitCmd[1]
-        : true
+      [splitCmd[0]]: splitCmd[1] || true
     })
   }
 

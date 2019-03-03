@@ -30,12 +30,12 @@ test('The index function returns an object containing keys matching single lette
   t.end()
 })
 
-test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true. The string "false" is replaced with boolean false (e.g, --something=false will become a "something" key with the false boolean value).', t => {
+test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true.', t => {
   const actual = index(['--whatever', '--bread=rye', '--foo', '--cheese=false'])
   t.equal(actual.whatever, true)
   t.equal(actual.bread, 'rye')
   t.equal(actual.foo, true)
-  t.equal(actual.cheese, false)
+  t.equal(actual.cheese, 'false')
   t.end()
 })
 
