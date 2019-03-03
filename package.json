@@ -1,6 +1,6 @@
 {
   "name": "manchego",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Cheesy CLI",
   "main": "index.js",
   "scripts": {
