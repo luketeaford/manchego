@@ -15,3 +15,8 @@ const cli = require('manchego')
 // Simple destructuring
 const { src, dest, template } = cli(process.argv)
 ```
+
+## TODO
+- Should converting 'false' to boolean be an option?
+- Should converting numbers be an option?
+- Should converting space separated string to array be an option?
