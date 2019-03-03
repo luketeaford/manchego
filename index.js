@@ -6,7 +6,7 @@ const hasTwoDashes = x => x.startsWith('--')
 const index = argv => {
   const arr = argv.slice(2)
   const obj = {}
-  const objFn = n => Object.assign(obj, n)
+  const objFn = name => Object.assign(obj, name)
 
   const dashArrays = part(arr.filter(hasDashes))(hasTwoDashes)
   const oneDashArr = dashArrays.fail
