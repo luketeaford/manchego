@@ -8,11 +8,20 @@ Cheesy CLI
 - [x] Double dash options expect equals sign
 - [x] Support variadic arguments
 
-## Usage
+## Usage Example
+```console
+node index.js -a ant -bcd --file=foo.js -z zappa zebra zoo
+```
+
 ```js
+// index.js
 const cli = require('manchego')
 
 // Simple destructuring
-const { src, dest, template } = cli(process.argv)
+const { a, b, c, d, file, z} = cli(process.argv)
+console.log(a) // 'apple'
+console.log(b && c && d) // true
+console.log(file) // 'foo.js'
+console.log(z) // 'zappa zebra zoo'
 ```
 

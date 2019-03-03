@@ -44,3 +44,14 @@ test('The index function returns an object with variadic arguments supported for
   t.equal(actual.p, 'cat dog bird')
   t.end()
 })
+
+test('The examples in the documentation work.', t => {
+  const actual = index(['-a', 'ant', '-bcd', '--file=x.js', '-z', 'zappa', 'zebra', 'zoo'])
+  t.equal(actual.a, 'ant')
+  t.equal(actual.b, true)
+  t.equal(actual.c, true)
+  t.equal(actual.d, true)
+  t.equal(actual.file, 'x.js')
+  t.equal(actual.z, 'zappa zebra zoo')
+  t.end()
+})
