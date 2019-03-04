@@ -6,7 +6,7 @@ Cheesy CLI
 - [x] Single dash options expect space separated values
 - [x] Single dash options can be combined
 - [x] Double dash options expect equals sign
-- [x] Support variadic arguments
+- [x] Variadic arguments can be passed to last single dash command
 
 ## Usage Example
 ```console
