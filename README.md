@@ -26,3 +26,5 @@ console.log(file) // 'foo.js'
 console.log(z) // 'zappa zebra zoo'
 ```
 
+## Tips
+Manchego organizes the data from `process.argv` into a simple format so you can process it how you like.
