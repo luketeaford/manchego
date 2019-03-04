@@ -10,11 +10,12 @@ Cheesy CLI
 
 ## Usage Example
 ```console
+# If this is your input...
 node index.js -a ant -bcd --file=foo.js -z zappa zebra zoo
 ```
 
 ```js
-// index.js
+// ...index.js will work like this
 const cli = require('manchego')
 
 // Simple destructuring
