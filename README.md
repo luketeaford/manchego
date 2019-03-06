@@ -11,7 +11,7 @@ Cheesy CLI
 ## Usage Example
 ```console
 # If this is your input...
-node index.js -a ant -bcd --file=foo.js -z zappa zebra zoo
+node index.js -a ape -bcd --file=foo.js -z zappa zebra zoo
 ```
 
 ```js
@@ -19,8 +19,8 @@ node index.js -a ant -bcd --file=foo.js -z zappa zebra zoo
 const cli = require('manchego')
 
 // Simple destructuring
-const { a, b, c, d, file, z} = cli(process.argv)
-console.log(a) // 'apple'
+const { a, b, c, d, file, z } = cli(process.argv)
+console.log(a) // 'ape'
 console.log(b && c && d) // true
 console.log(file) // 'foo.js'
 console.log(z) // 'zappa zebra zoo'
