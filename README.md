@@ -1,3 +1,5 @@
+<img alt="manchego logo" src="manchego-logo.png">
+
 # Manchego
 Cheesy CLI
 
