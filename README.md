@@ -4,16 +4,17 @@
 Cheesy CLI
 
 ## Design Goals
-- [x] No made-up syntax
-- [x] Single dash options expect space separated values
-- [x] Single dash options can be combined
-- [x] Double dash options expect equals sign
-- [x] Variadic arguments can be passed to last single dash command
+[x] No made-up syntax
+[x] Words preceeding a dash option are set to true
+[x] Single dash options expect space separated values
+[x] Single dash options can be combined
+[x] Double dash options expect equals sign
+[x] Variadic arguments can be passed to last single dash command
 
 ## Usage Example
 ```console
 # If this is your input...
-node index.js -a ape -bcd --file=foo.js -z zappa zebra zoo
+node index.js say -a ape -bcd --file=foo.js -z zappa zebra zoo
 ```
 
 ```js
@@ -21,7 +22,8 @@ node index.js -a ape -bcd --file=foo.js -z zappa zebra zoo
 const cli = require('manchego')
 
 // Simple destructuring
-const { a, b, c, d, file, z } = cli(process.argv)
+const { say, a, b, c, d, file, z } = cli(process.argv)
+console.log(say) // true
 console.log(a) // 'ape'
 console.log(b && c && d) // true
 console.log(file) // 'foo.js'

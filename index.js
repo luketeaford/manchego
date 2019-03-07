@@ -1,5 +1,6 @@
 const part = require('./lib/part')
 
+const negate = fn => x => !fn(x)
 const hasDashes = x => x.startsWith('-')
 const hasTwoDashes = x => x.startsWith('--')
 
@@ -8,9 +9,19 @@ const index = argv => {
   const obj = {}
   const objFn = name => Object.assign(obj, name)
 
+  const zeroDashArr = arr.filter(negate(hasDashes))
+
   const dashArrays = part(arr.filter(hasDashes))(hasTwoDashes)
   const oneDashArr = dashArrays.fail
   const twoDashArr = dashArrays.pass
+
+  const parseZeroDashes = x => {
+    if (arr.indexOf(x) < arr.findIndex(hasDashes)) {
+      objFn({ [x]: true })
+    }
+  }
+
+  zeroDashArr.forEach(parseZeroDashes)
 
   const parseOneDash = x => {
     const cmd = x.split('-')[1]
@@ -36,9 +47,7 @@ const index = argv => {
     const cmd = x.split('--')[1]
     const splitCmd = cmd.split('=')
 
-    objFn({
-      [splitCmd[0]]: splitCmd[1] || true
-    })
+    objFn({ [splitCmd[0]]: splitCmd[1] || true })
   }
 
   twoDashArr.forEach(parseTwoDashes)

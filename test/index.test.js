@@ -12,6 +12,15 @@ test('The index function expects to receive process.argv, so it ignores the firs
 // Adds 2 args to mimick process.argv and simplify test data
 const index = arr => actualIndex(['x', 'x', ...arr])
 
+test('The index function returns an object with any words that precede a command that begins with a dash set to true.', t => {
+  const actual = index(['help', 'butterfly', '-x', 'chill'])
+  t.equal(actual.help, true)
+  t.equal(actual.butterfly, true)
+  t.equal(actual.chill, undefined)
+  t.equal(actual.x, 'chill')
+  t.end()
+})
+
 test('The index function returns an object with a single letter command set to the space separated value that follows it.', t => {
   const actual = index(['-a', 'apple'])
   t.equal(actual.a, 'apple')
