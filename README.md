@@ -4,12 +4,12 @@
 Cheesy CLI
 
 ## Design Goals
-[x] No made-up syntax
-[x] Words preceeding a dash option are set to true
-[x] Single dash options expect space separated values
-[x] Single dash options can be combined
-[x] Double dash options expect equals sign
-[x] Variadic arguments can be passed to last single dash command
+- [x] No made-up syntax
+- [x] Words preceeding a dash option are set to true
+- [x] Single dash options expect space separated values
+- [x] Single dash options can be combined
+- [x] Double dash options expect equals sign
+- [x] Variadic arguments can be passed to last single dash command
 
 ## Usage Example
 ```console
@@ -32,3 +32,5 @@ console.log(z) // 'zappa zebra zoo'
 
 ## Tips
 Manchego organizes the data from `process.argv` into a simple format so you can process it how you like.
+
+Words that precede a dash command (a string beginning with '-' or '--') will be set to true. This is useful for choosing which function to use.
