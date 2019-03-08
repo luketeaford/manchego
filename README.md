@@ -1,4 +1,4 @@
-<img alt="manchego logo" src="manchego-logo.png">
+<img alt="" src="manchego-logo.png">
 
 # Manchego
 Cheesy CLI
@@ -8,13 +8,14 @@ Cheesy CLI
 - [x] Words preceeding a dash option are set to true
 - [x] Single dash options expect space separated values
 - [x] Single dash options can be combined
+- [x] Double dash options are stored in camelCase
 - [x] Double dash options expect equals sign
 - [x] Variadic arguments can be passed to last single dash command
 
 ## Usage Example
 ```console
 # If this is your input...
-node index.js say -a ape -bcd --file=foo.js -z zappa zebra zoo
+node index.js say -a ape -bd --cool-urls --file=foo.js -z zappa zebra zoo
 ```
 
 ```js
@@ -25,7 +26,8 @@ const cli = require('manchego')
 const { say, a, b, c, d, file, z } = cli(process.argv)
 console.log(say) // true
 console.log(a) // 'ape'
-console.log(b && c && d) // true
+console.log(b && d) // true
+console.log(coolUrls)// true
 console.log(file) // 'foo.js'
 console.log(z) // 'zappa zebra zoo'
 ```

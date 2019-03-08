@@ -1,4 +1,5 @@
 const part = require('./lib/part')
+const toCamelCase = require('./lib/toCamelCase')
 
 const negate = fn => x => !fn(x)
 const hasDashes = x => x.startsWith('-')
@@ -47,7 +48,7 @@ const index = argv => {
     const cmd = x.split('--')[1]
     const splitCmd = cmd.split('=')
 
-    objFn({ [splitCmd[0]]: splitCmd[1] || true })
+    objFn({ [toCamelCase(splitCmd[0])]: splitCmd[1] || true })
   }
 
   twoDashArr.forEach(parseTwoDashes)

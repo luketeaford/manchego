@@ -1,3 +1,6 @@
+## 0.7.0
+- Double dash commands with hyphens are stored in camelCase
+
 ## 0.6.0
 - Set words before dash commands to true
 
