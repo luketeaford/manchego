@@ -1,3 +1,6 @@
+## 0.7.1
+- Fix bug comparing arguments without dashes to -1 (not in index)
+
 ## 0.7.0
 - Double dash commands with hyphens are stored in camelCase
 
