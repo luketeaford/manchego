@@ -27,7 +27,7 @@ const { say, a, b, c, d, file, z } = cli(process.argv)
 console.log(say) // true
 console.log(a) // 'ape'
 console.log(b && d) // true
-console.log(coolUrls)// true
+console.log(coolUrls) // true
 console.log(file) // 'foo.js'
 console.log(z) // 'zappa zebra zoo'
 ```
