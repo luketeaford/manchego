@@ -7,3 +7,10 @@ test('The toCamelCase function returns a string with hyphens removed and the fir
   t.equal(actual, expected)
   t.end()
 })
+
+test('The toCamelCase function does not modify a string without hyphens.', t => {
+  const actual = toCamelCase('whatever')
+  const expected = 'whatever'
+  t.equal(actual, expected)
+  t.end()
+})
