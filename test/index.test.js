@@ -21,6 +21,12 @@ test('The index function returns an object with any words that precede a command
   t.end()
 })
 
+test('The index function returns an object with any words that precede a command that begins with a dash set to true even if there are no commands that begin with a dash.', t => {
+  const actual = index(['help'])
+  t.equal(actual.help, true)
+  t.end()
+})
+
 test('The index function returns an object with a single letter command set to the space separated value that follows it.', t => {
   const actual = index(['-a', 'apple'])
   t.equal(actual.a, 'apple')

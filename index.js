@@ -17,7 +17,7 @@ const index = argv => {
   const twoDashArr = dashArrays.pass
 
   const parseZeroDashes = x => {
-    if (arr.indexOf(x) < arr.findIndex(hasDashes)) {
+    if (arr.indexOf(x) <= Math.max(0, arr.findIndex(hasDashes))) {
       objFn({ [x]: true })
     }
   }
