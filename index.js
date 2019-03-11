@@ -4,13 +4,14 @@ const toCamelCase = require('./lib/toCamelCase')
 const negate = fn => x => !fn(x)
 const hasDashes = x => x.startsWith('-')
 const hasTwoDashes = x => x.startsWith('--')
+const hasNoDashes = negate(hasDashes)
 
 const index = argv => {
   const arr = argv.slice(2)
   const obj = {}
   const objFn = name => Object.assign(obj, name)
 
-  const zeroDashArr = arr.filter(negate(hasDashes))
+  const zeroDashArr = arr.filter(hasNoDashes)
 
   const dashArrays = part(arr.filter(hasDashes))(hasTwoDashes)
   const oneDashArr = dashArrays.fail
@@ -24,7 +25,7 @@ const index = argv => {
 
   zeroDashArr.forEach(parseZeroDashes)
 
-  const parseOneDash = x => {
+  const parseOneDash = (x, index) => {
     const cmd = x.split('-')[1]
     const nextValue = arr[arr.indexOf(x) + 1]
     const isLong = cmd.length > 1
@@ -32,8 +33,8 @@ const index = argv => {
     objFn({
       [cmd[0]]: !nextValue || (nextValue && nextValue.startsWith('-'))
         ? true
-        : oneDashArr.indexOf(x) === oneDashArr.length - 1
-          ? arr.slice(arr.indexOf(x) + 1).join(' ')
+        : index === oneDashArr.length - 1
+          ? arr.slice(arr.indexOf(x) + 1).filter(hasNoDashes).join(' ')
           : nextValue
     })
 

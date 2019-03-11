@@ -60,9 +60,9 @@ test('The index function returns an object with variadic arguments supported for
   t.end()
 })
 
-test('This weird bug with dash commands being treated like variadic arguments.', t => {
+test('The index function returns an object with variadic arguments supported for the last single dash parameter. If the last single dash parameter is passed a space separated value and then a dash command follows, it will not be treated as a variadic argument.', t => {
   const actual = index(['-t', 'something', '--cool-food=false'])
-  t.equal(actual.t, true)
+  t.equal(actual.t, 'something')
   t.equal(actual.coolFood, 'false')
   t.end()
 })
