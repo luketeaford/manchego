@@ -60,6 +60,13 @@ test('The index function returns an object with variadic arguments supported for
   t.end()
 })
 
+test('This weird bug with dash commands being treated like variadic arguments.', t => {
+  const actual = index(['-t', 'something', '--cool-food=false'])
+  t.equal(actual.t, true)
+  t.equal(actual.coolFood, 'false')
+  t.end()
+})
+
 test('The examples in the documentation work.', t => {
   const actual = index(['-a', 'ant', '-bd', '--cool-urls', '--file=x.js', '-z', 'zappa', 'zebra', 'zoo'])
   t.equal(actual.a, 'ant')
