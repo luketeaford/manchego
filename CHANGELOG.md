@@ -1,3 +1,6 @@
+## 0.7.2
+- Fix bug with variadic arguments in unusual circumstances
+
 ## 0.7.1
 - Fix bug comparing arguments without dashes to -1 (not in index)
 
