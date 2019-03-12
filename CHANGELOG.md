@@ -1,3 +1,6 @@
+## 0.8.0
+- Add community standards docs
+
 ## 0.7.2
 - Fix bug with variadic arguments in unusual circumstances
 
