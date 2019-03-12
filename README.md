@@ -11,7 +11,6 @@ Cheesy CLI
 - [x] Double dash options are stored in camelCase
 - [x] Double dash options expect equals sign
 - [x] Variadic arguments can be passed to last single dash command
-- [ ] Fix variadic args bug with -t 'something' and --cleanUrls=false
 
 ## Usage Example
 ```console
