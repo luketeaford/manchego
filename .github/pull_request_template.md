@@ -1,11 +1,7 @@
----
-name: Pull request template
-about: Create a pull request
-title: ''
-labels: ''
-assignees: ''
+**Feature name**
 
----
+**Feature description**
 
-**Incoming pull request**
-Not sure where this shows up.
+**Level of change (major/minor/patch)**
+
+**Related issues or questions**
