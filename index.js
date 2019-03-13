@@ -7,6 +7,8 @@ const hasTwoDashes = x => x.startsWith('--')
 const hasNoDashes = negate(hasDashes)
 
 const index = argv => {
+  if (!(argv && argv.slice)) return {}
+
   const arr = argv.slice(2)
   const obj = {}
   const objFn = name => Object.assign(obj, name)
@@ -38,9 +40,7 @@ const index = argv => {
           : nextValue
     })
 
-    if (isLong) {
-      parseOneDash(`-${cmd.slice(1)}`)
-    }
+    if (isLong) parseOneDash(`-${cmd.slice(1)}`)
   }
 
   oneDashArr.forEach(parseOneDash)

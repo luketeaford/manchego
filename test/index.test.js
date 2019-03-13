@@ -1,11 +1,23 @@
 const test = require('tape')
 const actualIndex = require('../index')
 
+test('The index function returns an object when called without arguments.', t => {
+  const actual = actualIndex()
+  t.equal(actual && typeof actual === 'object', true)
+  t.end()
+})
+
 test('The index function expects to receive process.argv, so it ignores the first two items in the array.', t => {
   const actual = actualIndex(['-a', '-b', '-c'])
   t.equal(actual.a, undefined)
   t.equal(actual.b, undefined)
   t.equal(actual.c, true)
+  t.end()
+})
+
+test('The index function returns an object when called without additional arguments.', t => {
+  const actual = actualIndex(['-a', '-b'])
+  t.equal(actual && typeof actual === 'object', true)
   t.end()
 })
 
