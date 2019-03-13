@@ -14,7 +14,6 @@ If there's a feature you want in Manchego, open a feature request. Let's make su
 - Alphabetize
 - Do not make decorative comments such as lines of punctuation
 - Shorter is better
-- To have few dependencies is to be happy
 - Use spaces not tabs
 
 ### Git Commit Messages
