@@ -1,7 +1,7 @@
 const toCamelCase = require('./lib/toCamelCase')
 
-const hasNoDashes = x => !x.startsWith('-')
 const hasDashes = x => x.startsWith('-')
+const hasZeroDashes = x => !x.startsWith('-')
 const hasOneDash = x => x.startsWith('-') && !x.startsWith('--')
 const hasTwoDashes = x => x.startsWith('--')
 
@@ -12,22 +12,18 @@ const index = argv => {
   const output = {}
   const assignToOutput = xObj => Object.assign(output, xObj)
 
-  const zeroDashArr = arr.filter(hasNoDashes)
-  const oneDashArr = arr.filter(hasOneDash)
-  const twoDashArr = arr.filter(hasTwoDashes)
-
   const parseZeroDashes = x => {
     if (arr.indexOf(x) <= Math.max(0, arr.findIndex(hasDashes))) {
       assignToOutput({ [x]: true })
     }
   }
 
-  zeroDashArr.forEach(parseZeroDashes)
+  arr.filter(hasZeroDashes).forEach(parseZeroDashes)
 
-  const parseOneDash = (x, index) => {
+  const parseOneDash = (x, index, oneDashArr) => {
     const cmd = x.split('-')[1]
     const nextValue = arr[arr.indexOf(x) + 1]
-    const isLong = cmd.length > 1
+    const isCombined = cmd.length > 1
 
     assignToOutput({
       [cmd[0]]: !nextValue || (nextValue && nextValue.startsWith('-'))
@@ -35,15 +31,15 @@ const index = argv => {
         : index === oneDashArr.length - 1
           ? arr
             .slice(arr.indexOf(x) + 1)
-            .filter(hasNoDashes)
+            .filter(hasZeroDashes)
             .join(' ')
           : nextValue
     })
 
-    if (isLong) parseOneDash(`-${cmd.slice(1)}`)
+    if (isCombined) parseOneDash(`-${cmd.slice(1)}`)
   }
 
-  oneDashArr.forEach(parseOneDash)
+  arr.filter(hasOneDash).forEach(parseOneDash)
 
   const parseTwoDashes = x => {
     const cmd = x.split('--')[1]
@@ -52,7 +48,7 @@ const index = argv => {
     assignToOutput({ [toCamelCase(splitCmd[0])]: splitCmd[1] || true })
   }
 
-  twoDashArr.forEach(parseTwoDashes)
+  arr.filter(hasTwoDashes).forEach(parseTwoDashes)
 
   return output
 }
