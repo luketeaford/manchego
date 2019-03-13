@@ -1,7 +1,7 @@
+const negate = require('./lib/negate')
 const part = require('./lib/part')
 const toCamelCase = require('./lib/toCamelCase')
 
-const negate = fn => x => !fn(x)
 const hasDashes = x => x.startsWith('-')
 const hasTwoDashes = x => x.startsWith('--')
 const hasNoDashes = negate(hasDashes)
