@@ -4,10 +4,10 @@
 Cheesy CLI
 
 ## Design Goals
-[x] No made-up syntax
-[x] No defaults or side effects
-[x] No dependencies
-[x] Always return an object
+- [x] No made-up syntax
+- [x] No defaults or side effects
+- [x] No dependencies
+- [x] Always return an object
 
 Manchego is a tool for making Command Line Interfaces. It uses simple rules instead of making up a syntax with special characters. It has no defaults or side effects. It always returns an object.
 
