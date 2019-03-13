@@ -1,10 +1,9 @@
-const negate = require('./lib/negate')
-const part = require('./lib/part')
 const toCamelCase = require('./lib/toCamelCase')
 
+const hasNoDashes = x => !x.startsWith('-')
 const hasDashes = x => x.startsWith('-')
+const hasOneDash = x => x.startsWith('-') && !x.startsWith('--')
 const hasTwoDashes = x => x.startsWith('--')
-const hasNoDashes = negate(hasDashes)
 
 const index = argv => {
   if (!(argv && argv.slice)) return {}
@@ -14,10 +13,8 @@ const index = argv => {
   const assignToOutput = xObj => Object.assign(output, xObj)
 
   const zeroDashArr = arr.filter(hasNoDashes)
-
-  const dashArrays = part(arr.filter(hasDashes))(hasTwoDashes)
-  const oneDashArr = dashArrays.fail
-  const twoDashArr = dashArrays.pass
+  const oneDashArr = arr.filter(hasOneDash)
+  const twoDashArr = arr.filter(hasTwoDashes)
 
   const parseZeroDashes = x => {
     if (arr.indexOf(x) <= Math.max(0, arr.findIndex(hasDashes))) {
