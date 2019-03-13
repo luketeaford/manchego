@@ -4,13 +4,20 @@
 Cheesy CLI
 
 ## Design Goals
-- [x] No made-up syntax
-- [x] Words preceeding a dash option are set to true
+[x] No made-up syntax
+[x] No defaults or side effects
+[x] No dependencies
+[x] Always return an object
+
+Manchego is a tool for making Command Line Interfaces. It uses simple rules instead of making up a syntax with special characters. It has no defaults or side effects. It always returns an object.
+
+## What it does
+- [x] Words preceeding dash options are set to true
 - [x] Single dash options expect space separated values
 - [x] Single dash options can be combined
+- [x] Multiple arguments can be passed to the last single dash command
 - [x] Double dash options are stored in camelCase
 - [x] Double dash options expect equals sign
-- [x] Variadic arguments can be passed to last single dash command
 
 ## Usage Example
 ```console
