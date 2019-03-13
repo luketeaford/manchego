@@ -10,8 +10,8 @@ const index = argv => {
   if (!(argv && argv.slice)) return {}
 
   const arr = argv.slice(2)
-  const obj = {}
-  const objFn = name => Object.assign(obj, name)
+  const output = {}
+  const assignToOutput = xObj => Object.assign(output, xObj)
 
   const zeroDashArr = arr.filter(hasNoDashes)
 
@@ -21,7 +21,7 @@ const index = argv => {
 
   const parseZeroDashes = x => {
     if (arr.indexOf(x) <= Math.max(0, arr.findIndex(hasDashes))) {
-      objFn({ [x]: true })
+      assignToOutput({ [x]: true })
     }
   }
 
@@ -32,11 +32,14 @@ const index = argv => {
     const nextValue = arr[arr.indexOf(x) + 1]
     const isLong = cmd.length > 1
 
-    objFn({
+    assignToOutput({
       [cmd[0]]: !nextValue || (nextValue && nextValue.startsWith('-'))
         ? true
         : index === oneDashArr.length - 1
-          ? arr.slice(arr.indexOf(x) + 1).filter(hasNoDashes).join(' ')
+          ? arr
+            .slice(arr.indexOf(x) + 1)
+            .filter(hasNoDashes)
+            .join(' ')
           : nextValue
     })
 
@@ -49,12 +52,12 @@ const index = argv => {
     const cmd = x.split('--')[1]
     const splitCmd = cmd.split('=')
 
-    objFn({ [toCamelCase(splitCmd[0])]: splitCmd[1] || true })
+    assignToOutput({ [toCamelCase(splitCmd[0])]: splitCmd[1] || true })
   }
 
   twoDashArr.forEach(parseTwoDashes)
 
-  return obj
+  return output
 }
 
 module.exports = index
