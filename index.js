@@ -10,11 +10,11 @@ const index = argv => {
 
   const arr = argv.slice(2)
   const output = {}
-  const assignToOutput = xObj => Object.assign(output, xObj)
+  const addToOutput = (key, value) => Object.assign(output, { [key]: value })
 
   const parseZeroDashes = x => {
     if (arr.indexOf(x) <= Math.max(0, arr.findIndex(hasDashes))) {
-      assignToOutput({ [x]: true })
+      addToOutput(x, true)
     }
   }
 
@@ -25,16 +25,15 @@ const index = argv => {
     const nextValue = arr[arr.indexOf(x) + 1]
     const isCombined = cmd.length > 1
 
-    assignToOutput({
-      [cmd[0]]: !nextValue || (nextValue && nextValue.startsWith('-'))
-        ? true
-        : index === oneDashArr.length - 1
-          ? arr
-            .slice(arr.indexOf(x) + 1)
-            .filter(hasZeroDashes)
-            .join(' ')
-          : nextValue
-    })
+    addToOutput(cmd[0], !nextValue || (nextValue && nextValue.startsWith('-'))
+      ? true
+      : index === oneDashArr.length - 1
+        ? arr
+          .slice(arr.indexOf(x) + 1)
+          .filter(hasZeroDashes)
+          .join(' ')
+        : nextValue
+    )
 
     if (isCombined) parseOneDash(`-${cmd.slice(1)}`)
   }
@@ -49,9 +48,7 @@ const index = argv => {
       ? nextValue
       : true
 
-    assignToOutput({
-      [toCamelCase(splitCmd[0])]: splitCmd[1] || spaceSeparatedValue
-    })
+    addToOutput(toCamelCase(splitCmd[0]), splitCmd[1] || spaceSeparatedValue)
   }
 
   arr.filter(hasTwoDashes).forEach(parseTwoDashes)
