@@ -1,3 +1,4 @@
+const joinNextValuesOf = require('./lib/joinNextValuesOf')
 const toCamelCase = require('./lib/toCamelCase')
 
 const hasDashes = x => x.startsWith('-')
@@ -20,10 +21,7 @@ const index = argv => {
 
   arr.filter(hasZeroDashes).forEach(parseZeroDashes)
 
-  const joinRemainingValues = x => arr
-    .slice(arr.indexOf(x) + 1)
-    .filter(hasZeroDashes)
-    .join(' ')
+  const joinStringsAfter = joinNextValuesOf(arr, hasZeroDashes)
 
   const parseOneDash = (x, index, oneDashArr) => {
     const cmd = x.split('-')[1]
@@ -33,7 +31,7 @@ const index = argv => {
     addToOutput(cmd[0], !nextValue || (nextValue && nextValue.startsWith('-'))
       ? true
       : index === oneDashArr.length - 1
-        ? joinRemainingValues(x)
+        ? joinStringsAfter(x)
         : nextValue
     )
 
@@ -50,7 +48,7 @@ const index = argv => {
     const spaceValues = !nextValue || (nextValue && nextValue.startsWith('-'))
       ? true
       : index === twoDashArr.length - 1
-        ? joinRemainingValues(x)
+        ? joinStringsAfter(x)
         : nextValue
 
     addToOutput(toCamelCase(splitCmd[0]), splitCmd[1] || spaceValues)
