@@ -46,10 +46,12 @@ test('The index function returns an object with a single letter command set to t
 })
 
 test('The index function returns an object containing keys matching single letter commands set to true if the value that follows it is not separated with a space. Individual parameters can be grouped if there is no argument that follows (e.g., -def is equivalent to -d -e -f).', t => {
-  const actual = index(['-a', 'apple', '-b', '-c', '-def', '-g'])
+  const actual = index(['-a', 'apple', '-b', '--cool', '-c', '--dog-food=yum', '-def', '-g'])
   t.equal(actual.a, 'apple')
   t.equal(actual.b, true)
+  t.equal(actual.cool, true)
   t.equal(actual.c, true)
+  t.equal(actual.dogFood, 'yum')
   t.equal(actual.d, true)
   t.equal(actual.e, true)
   t.equal(actual.f, true)
@@ -63,6 +65,13 @@ test('The index function returns an object containing keys matching commands dec
   t.equal(actual.bread, 'rye')
   t.equal(actual.coolUrls, true)
   t.equal(actual.cheese, 'false')
+  t.end()
+})
+
+test('The index function returns an object where two dashes can have space separated values too.', t => {
+  const actual = index(['--sure', 'cool', '--fine', 'whatever'])
+  t.equal(actual.sure, 'cool')
+  t.equal(actual.fine, 'whatever')
   t.end()
 })
 

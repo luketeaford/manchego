@@ -17,7 +17,8 @@ Manchego is a tool for making Command Line Interfaces. It uses simple rules inst
 - [x] Single dash options can be combined
 - [x] Multiple arguments can be passed to the last single dash command
 - [x] Double dash options are stored in camelCase
-- [x] Double dash options expect equals sign
+- [x] Double dash options can be separated by equals sign
+- [x] Double dash options can receive a space separated value
 
 ## Usage Example
 ```console

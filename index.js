@@ -44,8 +44,14 @@ const index = argv => {
   const parseTwoDashes = x => {
     const cmd = x.split('--')[1]
     const splitCmd = cmd.split('=')
+    const nextValue = arr[arr.indexOf(x) + 1]
+    const spaceSeparatedValue = nextValue && hasZeroDashes(nextValue)
+      ? nextValue
+      : true
 
-    assignToOutput({ [toCamelCase(splitCmd[0])]: splitCmd[1] || true })
+    assignToOutput({
+      [toCamelCase(splitCmd[0])]: splitCmd[1] || spaceSeparatedValue
+    })
   }
 
   arr.filter(hasTwoDashes).forEach(parseTwoDashes)
