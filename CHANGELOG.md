@@ -1,3 +1,6 @@
+## 0.9.0
+- Support space separated values for double dash commands
+
 ## 0.8.0
 - Add community standards docs
 
