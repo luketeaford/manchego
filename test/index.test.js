@@ -88,6 +88,14 @@ test('The index function returns an object with variadic arguments supported for
   t.end()
 })
 
+test('The index function supports variadic arguments for double dash commands.', t => {
+  const actual = index(['-a', '-b', '--marx-bros', 'groucho', 'harpo', 'chico'])
+  t.equal(actual.a, true)
+  t.equal(actual.b, true)
+  t.equal(actual.marxBros, 'groucho harpo chico')
+  t.end()
+})
+
 test('The examples in the documentation work.', t => {
   const actual = index(['-a', 'ant', '-bd', '--cool-urls', '--file=x.js', '-z', 'zappa', 'zebra', 'zoo'])
   t.equal(actual.a, 'ant')

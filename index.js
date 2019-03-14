@@ -20,6 +20,11 @@ const index = argv => {
 
   arr.filter(hasZeroDashes).forEach(parseZeroDashes)
 
+  const joinRemainingValues = x => arr
+    .slice(arr.indexOf(x) + 1)
+    .filter(hasZeroDashes)
+    .join(' ')
+
   const parseOneDash = (x, index, oneDashArr) => {
     const cmd = x.split('-')[1]
     const nextValue = arr[arr.indexOf(x) + 1]
@@ -28,10 +33,7 @@ const index = argv => {
     addToOutput(cmd[0], !nextValue || (nextValue && nextValue.startsWith('-'))
       ? true
       : index === oneDashArr.length - 1
-        ? arr
-          .slice(arr.indexOf(x) + 1)
-          .filter(hasZeroDashes)
-          .join(' ')
+        ? joinRemainingValues(x)
         : nextValue
     )
 
@@ -40,15 +42,18 @@ const index = argv => {
 
   arr.filter(hasOneDash).forEach(parseOneDash)
 
-  const parseTwoDashes = x => {
+  const parseTwoDashes = (x, index, twoDashArr) => {
     const cmd = x.split('--')[1]
     const splitCmd = cmd.split('=')
     const nextValue = arr[arr.indexOf(x) + 1]
-    const spaceSeparatedValue = nextValue && hasZeroDashes(nextValue)
-      ? nextValue
-      : true
 
-    addToOutput(toCamelCase(splitCmd[0]), splitCmd[1] || spaceSeparatedValue)
+    const spaceValues = !nextValue || (nextValue && nextValue.startsWith('-'))
+      ? true
+      : index === twoDashArr.length - 1
+        ? joinRemainingValues(x)
+        : nextValue
+
+    addToOutput(toCamelCase(splitCmd[0]), splitCmd[1] || spaceValues)
   }
 
   arr.filter(hasTwoDashes).forEach(parseTwoDashes)
