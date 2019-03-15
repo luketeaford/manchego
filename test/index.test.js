@@ -18,13 +18,13 @@ test('Manchego expects to receive process.argv, an array, so it ignores the firs
 // Mimick process.argv by adding two args to simplify test data
 const manchego = arr => actualManchego(['x', 'x', ...arr])
 
-test('Manchego takes an array and returns an object with a key named by the first item in the array that precedes the first option in the array set to true.', t => {
+test('An argument in the array that precedes the first option in the array is set to true.', t => {
   const actual = manchego(['help'])
   t.equal(actual.help, true)
   t.end()
 })
 
-test('Manchego takes an array and returns an object with any keys named by the items in the array set to true that precede the first option in the array.', t => {
+test('Any arguments in the array that precede the first option are set to true.', t => {
   const actual = manchego(['help', 'hide'])
   t.equal(actual.help, true)
   t.equal(actual.hide, true)
@@ -40,38 +40,20 @@ test('Manchego takes an array and returns an object with any keys named by the i
   t.end()
 })
 
-// TODO REVISE BELOW THIS POINT
-test('Manchego returns an object with any argument that precedes the first option set to true.', t => {
-  const actual = manchego(['help', 'butterfly', '-x', 'chill'])
-  t.equal(actual.help, true)
-  t.equal(actual.butterfly, true)
-  t.equal(actual.x, 'chill')
-  t.equal(actual.chill, undefined)
+test('Single letter options are set to true if not followed by an argument.', t => {
+  const actual = manchego(['-w'])
+  t.equal(actual.w, true)
   t.end()
 })
 
-test('Manchego returns an object with single letter options set to the argument that follows it.', t => {
+test('Single letter options are set to the argument that follows them in the array.', t => {
   const actual = manchego(['-a', 'apple', '-v', 'golden delicious'])
   t.equal(actual.a, 'apple')
   t.equal(actual.v, 'golden delicious')
   t.end()
 })
 
-test('Manchego returns an object containing keys matching single letter options set to true if the key is not followed by an argument. Individual parameters can be grouped if there is no argument that follows (e.g., -def is equivalent to -d -e -f).', t => {
-  const actual = manchego(['-a', 'apple', '-b', '--cool', '-c', '--dog-food=yum', '-def', '-g'])
-  t.equal(actual.a, 'apple')
-  t.equal(actual.b, true)
-  t.equal(actual.cool, true)
-  t.equal(actual.c, true)
-  t.equal(actual.dogFood, 'yum')
-  t.equal(actual.d, true)
-  t.equal(actual.e, true)
-  t.equal(actual.f, true)
-  t.equal(actual.g, true)
-  t.end()
-})
-
-test('Manchego returns an object containing keys matching single letter options set to true if the key is not followed by an argument. Single letter options can be grouped together if no option follows (e.g., -def is equivalent to -d -e -f).', t => {
+test('Single letter options can be grouped together (e.g., -def is equivalent to -d -e -f).', t => {
   const actual = manchego(['-abc'])
   t.equal(actual.a, true)
   t.equal(actual.b, true)
@@ -79,6 +61,7 @@ test('Manchego returns an object containing keys matching single letter options 
   t.end()
 })
 
+// REVISE BELOW
 test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true. If the command is hyphenated, it will be stored camelCase instead.', t => {
   const actual = manchego(['--whatever', '--bread=rye', '--cool-urls', '--cheese=false'])
   t.equal(actual.whatever, true)
