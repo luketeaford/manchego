@@ -1,3 +1,7 @@
+## 0.9.1
+- Fix bug when passing arguments without options
+- Minor performance improvements
+
 ## 0.9.0
 - Support space separated values for double dash commands
 
