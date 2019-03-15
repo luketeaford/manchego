@@ -3,6 +3,10 @@
   "version": "0.9.1",
   "description": "Cheesy CLI",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib/"
+  ],
   "scripts": {
     "clean": "rm -rf coverage .nyc_output",
     "lint": "standard --fix",

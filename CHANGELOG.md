@@ -1,3 +1,6 @@
+## 0.9.2
+- Remove cruft from package
+
 ## 0.9.1
 - Fix bug when passing arguments without options
 - Minor performance improvements
