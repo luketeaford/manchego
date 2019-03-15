@@ -46,9 +46,6 @@ Manchego organizes the data from `process.argv` into a simple format so you can 
 Words that precede a dash command (a string beginning with `-` or `--`) will be set to `true`. This enables the CLI to be used to support multiple functions.
 
 ## Roadmap to 1.0.0
-- [ ] Correct and standardize documentation ("options" and "arguments")
-- [ ] Improve test clarity and begin with simple examples that gradually increase in complexity
 - [ ] Show usage examples in small chunks
 - [ ] AddToOutput vs AssignToOutput (assign is probably better)
 - [ ] Solve suspicious similarity with variadic args for single and double hyphen options
-- [ ] Update issue templates
