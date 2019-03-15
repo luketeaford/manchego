@@ -6,7 +6,7 @@ const hasZeroDashes = x => !x.startsWith('-')
 const hasOneDash = x => x.startsWith('-') && !x.startsWith('--')
 const hasTwoDashes = x => x.startsWith('--')
 
-const index = argv => {
+const manchego = argv => {
   if (!(argv && argv.slice)) return {}
 
   const arr = argv.slice(2)
@@ -59,4 +59,4 @@ const index = argv => {
   return output
 }
 
-module.exports = index
+module.exports = manchego
