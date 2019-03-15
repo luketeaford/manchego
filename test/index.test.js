@@ -1,13 +1,13 @@
 const test = require('tape')
 const actualIndex = require('../index')
 
-test('The index function returns an object when called without arguments.', t => {
+test('Manchego returns an object when called without arguments.', t => {
   const actual = actualIndex()
   t.equal(actual && typeof actual === 'object', true)
   t.end()
 })
 
-test('The index function expects to receive process.argv, so it ignores the first two items in the array.', t => {
+test('Manchego expects to receive process.argv, so it ignores the first two items in the array.', t => {
   const actual = actualIndex(['-a', '-b', '-c'])
   t.equal(actual.a, undefined)
   t.equal(actual.b, undefined)
@@ -15,37 +15,40 @@ test('The index function expects to receive process.argv, so it ignores the firs
   t.end()
 })
 
-test('The index function returns an object when called without additional arguments.', t => {
+test('Manchego returns an object when called without additional arguments.', t => {
   const actual = actualIndex(['-a', '-b'])
   t.equal(actual && typeof actual === 'object', true)
   t.end()
 })
 
-// Adds 2 args to mimick process.argv and simplify test data
+// Mimick process.argv by adding two args to simplify test data
 const index = arr => actualIndex(['x', 'x', ...arr])
 
-test('The index function returns an object with any words that precede a command that begins with a dash set to true.', t => {
+test.only('Manchego returns an object with any argument that precedes an option set to true even if no options are provided.', t => {
+  const actual = index(['help', 'hide', 'hey', 'f'])
+  t.equal(actual.help, true)
+  t.equal(actual.hide, true)
+  t.equal(actual.hey, true)
+  t.end()
+})
+
+test('Manchego returns an object with any argument that precedes the first option set to true.', t => {
   const actual = index(['help', 'butterfly', '-x', 'chill'])
   t.equal(actual.help, true)
   t.equal(actual.butterfly, true)
-  t.equal(actual.chill, undefined)
   t.equal(actual.x, 'chill')
+  t.equal(actual.chill, undefined)
   t.end()
 })
 
-test('The index function returns an object with any words that precede a command that begins with a dash set to true even if there are no commands that begin with a dash.', t => {
-  const actual = index(['help'])
-  t.equal(actual.help, true)
-  t.end()
-})
-
-test('The index function returns an object with a single letter command set to the space separated value that follows it.', t => {
-  const actual = index(['-a', 'apple'])
+test('Manchego returns an object with single letter options set to the argument that follows it.', t => {
+  const actual = index(['-a', 'apple', '-v', 'golden delicious'])
   t.equal(actual.a, 'apple')
+  t.equal(actual.v, 'golden delicious')
   t.end()
 })
 
-test('The index function returns an object containing keys matching single letter commands set to true if the value that follows it is not separated with a space. Individual parameters can be grouped if there is no argument that follows (e.g., -def is equivalent to -d -e -f).', t => {
+test('Manchego returns an object containing keys matching single letter options set to true if the key is not followed by an argument. Individual parameters can be grouped if there is no argument that follows (e.g., -def is equivalent to -d -e -f).', t => {
   const actual = index(['-a', 'apple', '-b', '--cool', '-c', '--dog-food=yum', '-def', '-g'])
   t.equal(actual.a, 'apple')
   t.equal(actual.b, true)
@@ -56,6 +59,14 @@ test('The index function returns an object containing keys matching single lette
   t.equal(actual.e, true)
   t.equal(actual.f, true)
   t.equal(actual.g, true)
+  t.end()
+})
+
+test('Manchego returns an object containing keys matching single letter options set to true if the key is not followed by an argument. Single letter options can be grouped together if no option follows (e.g., -def is equivalent to -d -e -f).', t => {
+  const actual = index(['-abc'])
+  t.equal(actual.a, true)
+  t.equal(actual.b, true)
+  t.equal(actual.c, true)
   t.end()
 })
 
