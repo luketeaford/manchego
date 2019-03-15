@@ -28,10 +28,10 @@ node index.js say -a ape -bd --cool-urls --file=foo.js -z zappa zebra zoo
 
 ```js
 // ...index.js will work like this
-const cli = require('manchego')
+const manchego = require('manchego')
 
 // Simple destructuring
-const { say, a, b, c, d, file, z } = cli(process.argv)
+const { say, a, b, c, d, file, z } = manchego(process.argv)
 console.log(say) // true
 console.log(a) // 'ape'
 console.log(b && d) // true
