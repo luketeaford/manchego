@@ -61,7 +61,66 @@ test('Single letter options can be grouped together (e.g., -def is equivalent to
   t.end()
 })
 
-// REVISE BELOW
+test('Variadic arguments can be passed to the last single letter option.', t => {
+  const actual = manchego(['-g', 'grape', 'gorilla', 'glue'])
+  t.equal(actual.g, 'grape gorilla glue')
+  t.equal(actual.grape, undefined)
+  t.equal(actual.gorilla, undefined)
+  t.equal(actual.glue, undefined)
+  t.end()
+})
+
+test('Variadic arguments can be passed to the first single letter option of the last group of single letter options.', t => {
+  const actual = manchego(['-gar', 'grape', 'gorilla', 'glue'])
+  t.equal(actual.a, true)
+  t.equal(actual.r, true)
+  t.equal(actual.g, 'grape gorilla glue')
+  t.equal(actual.grape, undefined)
+  t.equal(actual.gorilla, undefined)
+  t.equal(actual.glue, undefined)
+  t.end()
+})
+
+test('An option beginning with two hyphens is set to true if it does not contain an equals sign.', t => {
+  const actual = manchego(['--ears'])
+  t.equal(actual.ears, true)
+  t.end()
+})
+
+test('An option beginning with two hyphens that does not contain an equals sign is set to the argument that follows it.', t => {
+  const actual = manchego(['--stone', 'cold'])
+  t.equal(actual.stone, 'cold')
+  t.end()
+})
+
+test('An option beginning with two hyphens and containing an equals sign is set to the value following the equal sign.', t => {
+  const actual = manchego(['--calculator=solar powered', 'no'])
+  t.equal(actual.calculator, 'solar powered')
+  t.equal(actual.no, undefined)
+  t.end()
+})
+
+test('Variadic arguments can be passed to the last option that begins with two dashes.', t => {
+  const actual = manchego(['--cat', 'nip', 'nap', 'burglar'])
+  t.equal(actual.cat, 'nip nap burglar')
+  t.equal(actual.nip, undefined)
+  t.equal(actual.nap, undefined)
+  t.equal(actual.burglar, undefined)
+  t.end()
+})
+
+test('Variadic arguments cannot be set to an option that contains an equals sign.', t => {
+  const actual = manchego(['--cat=siamese', 'nip', 'nap', 'burglar'])
+  t.equal(actual.cat, 'siamese')
+  t.equal(actual.nip, undefined)
+  t.equal(actual.nap, undefined)
+  t.equal(actual.burglar, undefined)
+  t.end()
+})
+
+// TODO Write tests for multiple dash options
+// TODO Revise below
+
 test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true. If the command is hyphenated, it will be stored camelCase instead.', t => {
   const actual = manchego(['--whatever', '--bread=rye', '--cool-urls', '--cheese=false'])
   t.equal(actual.whatever, true)
