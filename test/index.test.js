@@ -18,6 +18,15 @@ test('Manchego expects to receive process.argv, an array, so it ignores the firs
 // Mimic process.argv by adding two args to simplify test data
 const manchego = arr => actualManchego(['x', 'x', ...arr])
 
+test('Manchego stores arguments to options as strings.', t => {
+  const actual = manchego(['-a', 'true', '-b', 'false', '--c=0', '--d=false'])
+  t.equal(actual.a, 'true')
+  t.equal(actual.b, 'false')
+  t.equal(actual.c, '0')
+  t.equal(actual.d, 'false')
+  t.end()
+})
+
 test('An argument in the array that precedes the first option in the array is set to true.', t => {
   const actual = manchego(['help'])
   t.equal(actual.help, true)
@@ -134,48 +143,34 @@ test('Variadic arguments can be passed to the last option that begins with two d
   t.end()
 })
 
-test('Options beginning with two dashes are set to true if they do not have an argument.', t => {
+test('Options beginning with two hyphens are set to true if they do not have an argument.', t => {
   const actual = manchego(['--air-guitar', '--synth'])
   t.equal(actual.airGuitar, true)
   t.equal(actual.synth, true)
   t.end()
 })
-// TODO Revise below
 
-test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true. If the command is hyphenated, it will be stored camelCase instead.', t => {
-  const actual = manchego(['--whatever', '--bread=rye', '--cool-urls', '--cheese=false'])
-  t.equal(actual.whatever, true)
-  t.equal(actual.bread, 'rye')
-  t.equal(actual.coolUrls, true)
-  t.equal(actual.cheese, 'false')
+test('Options beginning with two hyphens are set to the values of the arguments supplied by spaces.', t => {
+  const actual = manchego(['--sausage', 'bratwurst', '--pasta', 'ravioli'])
+  t.equal(actual.sausage, 'bratwurst')
+  t.equal(actual.pasta, 'ravioli')
   t.end()
 })
 
-test('The index function returns an object where two dashes can have space separated values too.', t => {
-  const actual = manchego(['--sure', 'cool', '--fine', 'whatever'])
-  t.equal(actual.sure, 'cool')
-  t.equal(actual.fine, 'whatever')
+test('Options beginning with two hyphens and containing an equals sign are set to the values to the right of the equals sign.', t => {
+  const actual = manchego(['--candy-bar=chocolate', '--arf=dog-sound'])
+  t.equal(actual.candyBar, 'chocolate')
+  t.equal(actual.arf, 'dog-sound')
   t.end()
 })
 
-test('The index function returns an object with variadic arguments supported for the last single dash parameter (e.g, -t thing1 thing2 thing3 will return a "t" key with the value "thing1 thing2 thing3").', t => {
-  const actual = manchego(['--count=0', '-p', 'cat', 'dog', 'bird'])
-  t.equal(actual.p, 'cat dog bird')
-  t.end()
-})
-
-test('The index function returns an object with variadic arguments supported for the last single dash parameter. If the last single dash parameter is passed a space separated value and then a dash command follows, it will not be treated as a variadic argument.', t => {
-  const actual = manchego(['-t', 'something', '--cool-food=false'])
-  t.equal(actual.t, 'something')
-  t.equal(actual.coolFood, 'false')
-  t.end()
-})
-
-test('The index function supports variadic arguments for double dash commands.', t => {
-  const actual = manchego(['-a', '-b', '--marx-bros', 'groucho', 'harpo', 'chico'])
-  t.equal(actual.a, true)
-  t.equal(actual.b, true)
-  t.equal(actual.marxBros, 'groucho harpo chico')
+test('When a mix of single and double dash options is supplied and there are variadic arguments, they are applied to the last option.', t => {
+  const setA = manchego(['-m', '--marx-bros', 'groucho', 'chico', 'harpo'])
+  t.equal(setA.m, true)
+  t.equal(setA.marxBros, 'groucho chico harpo')
+  const setB = manchego(['--marx-bros', '-m', 'groucho', 'chico', 'harpo'])
+  t.equal(setB.marxBros, true)
+  t.equal(setB.m, 'groucho chico harpo')
   t.end()
 })
 
