@@ -15,7 +15,7 @@ test('Manchego expects to receive process.argv, an array, so it ignores the firs
   t.end()
 })
 
-// Mimick process.argv by adding two args to simplify test data
+// Mimic process.argv by adding two args to simplify test data
 const manchego = arr => actualManchego(['x', 'x', ...arr])
 
 test('An argument in the array that precedes the first option in the array is set to true.', t => {
@@ -87,6 +87,12 @@ test('An option beginning with two hyphens is set to true if it does not contain
   t.end()
 })
 
+test('An option beginning with two hyphens and separated with other hyphens will be stored in camelCase.', t => {
+  const actual = manchego(['--the-velvet-underground'])
+  t.equal(actual.theVelvetUnderground, true)
+  t.end()
+})
+
 test('An option beginning with two hyphens that does not contain an equals sign is set to the argument that follows it.', t => {
   const actual = manchego(['--stone', 'cold'])
   t.equal(actual.stone, 'cold')
@@ -100,7 +106,7 @@ test('An option beginning with two hyphens and containing an equals sign is set 
   t.end()
 })
 
-test('Variadic arguments can be passed to the last option that begins with two dashes.', t => {
+test('The last option that begins with two dashes can accept variadic arguments.', t => {
   const actual = manchego(['--cat', 'nip', 'nap', 'burglar'])
   t.equal(actual.cat, 'nip nap burglar')
   t.equal(actual.nip, undefined)
@@ -118,7 +124,22 @@ test('Variadic arguments cannot be set to an option that contains an equals sign
   t.end()
 })
 
-// TODO Write tests for multiple dash options
+test('Variadic arguments can be passed to the last option that begins with two dashes.', t => {
+  const actual = manchego(['--kitten', '--cat', 'nip', 'nap', 'burglar'])
+  t.equal(actual.kitten, true)
+  t.equal(actual.cat, 'nip nap burglar')
+  t.equal(actual.nip, undefined)
+  t.equal(actual.nap, undefined)
+  t.equal(actual.burglar, undefined)
+  t.end()
+})
+
+test('Options beginning with two dashes are set to true if they do not have an argument.', t => {
+  const actual = manchego(['--air-guitar', '--synth'])
+  t.equal(actual.airGuitar, true)
+  t.equal(actual.synth, true)
+  t.end()
+})
 // TODO Revise below
 
 test('The index function returns an object containing keys matching commands declared with two dashes equal to the value to the right of the equals sign. If no value is provided, it will be set to true. If the command is hyphenated, it will be stored camelCase instead.', t => {
