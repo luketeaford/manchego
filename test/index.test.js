@@ -1,37 +1,47 @@
 const test = require('tape')
-const actualIndex = require('../index')
+const actualManchego = require('../index')
 
-test('Manchego returns an object when called without arguments.', t => {
-  const actual = actualIndex()
+test('Manchego returns an object when called without an argument.', t => {
+  const actual = actualManchego()
   t.equal(actual && typeof actual === 'object', true)
   t.end()
 })
 
-test('Manchego expects to receive process.argv, so it ignores the first two items in the array.', t => {
-  const actual = actualIndex(['-a', '-b', '-c'])
+test('Manchego expects to receive process.argv, an array, so it ignores the first two items in the array which are not provided by user input.', t => {
+  const actual = actualManchego(['-a', '-b', '-c'])
   t.equal(actual.a, undefined)
   t.equal(actual.b, undefined)
   t.equal(actual.c, true)
   t.end()
 })
 
-test('Manchego returns an object when called without additional arguments.', t => {
-  const actual = actualIndex(['-a', '-b'])
-  t.equal(actual && typeof actual === 'object', true)
+// Mimick process.argv by adding two args to simplify test data
+// TODO Rename index to manchego
+const index = arr => actualManchego(['x', 'x', ...arr])
+
+test('Manchego takes an array and returns an object with a key named by the first item in the array that precedes the first option in the array set to true.', t => {
+  const actual = index(['help'])
+  t.equal(actual.help, true)
   t.end()
 })
 
-// Mimick process.argv by adding two args to simplify test data
-const index = arr => actualIndex(['x', 'x', ...arr])
-
-test.only('Manchego returns an object with any argument that precedes an option set to true even if no options are provided.', t => {
-  const actual = index(['help', 'hide', 'hey', 'f'])
+test('Manchego takes an array and returns an object with any keys named by the items in the array set to true that precede the first option in the array.', t => {
+  const actual = index(['help', 'hide'])
   t.equal(actual.help, true)
   t.equal(actual.hide, true)
-  t.equal(actual.hey, true)
   t.end()
 })
 
+test('Manchego takes an array and returns an object with any keys named by the items in the array set to true that precede the first option in the array.', t => {
+  const actual = index(['help', 'hide', '-a', 'foo'])
+  t.equal(actual.help, true)
+  t.equal(actual.hide, true)
+  t.equal(actual.a, 'foo')
+  t.equal(actual.foo, undefined)
+  t.end()
+})
+
+// TODO REVISE BELOW THIS POINT
 test('Manchego returns an object with any argument that precedes the first option set to true.', t => {
   const actual = index(['help', 'butterfly', '-x', 'chill'])
   t.equal(actual.help, true)

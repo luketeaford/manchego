@@ -13,11 +13,11 @@ const manchego = argv => {
   const output = {}
   const addToOutput = (key, value) => Object.assign(output, { [key]: value })
 
+  const firstOption = arr.findIndex(hasDashes)
+  const hasOptions = firstOption >= 0
+
   const parseZeroDashes = x => {
-    // TOOD: Problem here with -1
-    // Will work with a dash option but not otherwise. Consider this:
-    //              1  <= Math.max(0, -1)
-    if (arr.indexOf(x) <= Math.max(0, arr.findIndex(hasDashes))) {
+    if (!hasOptions || arr.indexOf(x) < firstOption) {
       addToOutput(x, true)
     }
   }
