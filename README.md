@@ -1,4 +1,4 @@
-<img alt="" src="manchego-logo.png">
+!['']('manchego-logo.png')
 
 # Manchego
 Cheesy CLI
