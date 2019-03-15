@@ -1,4 +1,4 @@
-!['']('manchego-logo.png')
+<img alt="" src="manchego-logo.png">
 
 # Manchego
 Cheesy CLI
@@ -51,4 +51,3 @@ Words that precede a dash command (a string beginning with `-` or `--`) will be 
 - [ ] Show usage examples in small chunks
 - [ ] AddToOutput vs AssignToOutput (assign is probably better)
 - [ ] Solve suspicious similarity with variadic args for single and double hyphen options
-- [ ] Use markdown for logo in readme instead of HTML
