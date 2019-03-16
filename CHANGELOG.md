@@ -1,3 +1,6 @@
+## 0.9.5
+- Minor bugfixes and documentation improvements
+
 ## 0.9.4
 - Documentation improvements
 
