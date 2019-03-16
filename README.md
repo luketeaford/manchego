@@ -78,6 +78,3 @@ showWarnings // 'false'
 const showWarningsEnabled = showWarnings !== 'false' // false
 
 ```
-
-## Roadmap to 1.0.0
-- [ ] Fix remaining bugs in failing tests
