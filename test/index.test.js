@@ -33,11 +33,12 @@ test('An argument in the array that precedes the first option in the array is se
   t.end()
 })
 
+// TODO Fix this bug
 test('Variadic arguments are only applied to single- or double-hyphen options.', t => {
   const actual = manchego(['say', '-xy'])
   t.equal(actual.say, true)
   t.equal(actual.x, true)
-  // t.equal(actual.y, true)
+  t.equal(actual.y, true)
   t.end()
 })
 
