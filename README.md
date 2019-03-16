@@ -12,7 +12,7 @@ Cheesy CLI
 Manchego is a tool for making Command Line Interfaces. It uses simple rules instead of making up a syntax with special characters. It has no defaults or side effects. It always returns an object.
 
 ## What it Does
-- [x] Arguments preceeding single- or double-hyphen options are set to true
+- [x] Arguments preceeding single- or double- hyphen options are set to true
 - [x] Single- and double- hyphen options can receive space separated values
 - [x] Multiple arguments can be passed to the last single- or double- hyphen option
 - [x] Single-hyphen options can be combined
@@ -33,7 +33,7 @@ const manchego = require('manchego')
 // Pass process.argv into the manchego function which returns an object
 const cli = manchego(process.argv)
 
-// Arguments preceding single- or double-hyphen options are set to true
+// Arguments preceding single- or double- hyphen options are set to true
 cli.say // true
 
 // Single- and double- hyphen options can receive space separated values
