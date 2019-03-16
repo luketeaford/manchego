@@ -80,5 +80,4 @@ const showWarningsEnabled = showWarnings !== 'false' // false
 ```
 
 ## Roadmap to 1.0.0
-- [ ] Test output should only show failing tests
 - [ ] Fix remaining bugs in failing tests
