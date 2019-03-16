@@ -46,3 +46,4 @@ Words that precede a dash command (a string beginning with `-` or `--`) will be 
 
 ## Roadmap to 1.0.0
 - [ ] Show usage examples in small chunks
+- [ ] Remove reference to dashes in code
