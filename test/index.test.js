@@ -33,7 +33,6 @@ test('An argument in the array that precedes the first option in the array is se
   t.end()
 })
 
-// TODO Fix this bug
 test('Variadic arguments are only applied to single- or double-hyphen options.', t => {
   const actual = manchego(['say', '-xy'])
   t.equal(actual.say, true)
@@ -183,13 +182,41 @@ test('When a mix of single- and double-hyphen options is supplied and there are 
   t.end()
 })
 
-test.skip('The examples in the documentation work.', t => {
-  const actual = manchego(['say', '-a', 'ant', '-bd', '--cool-urls', '--file=x.js', '-z', 'zappa', 'zebra', 'zoo'])
+test('The simple examples in the documentation work correctly.', t => {
+  const actual = manchego([
+    'say',
+    '-a', 'ape',
+    '-bd',
+    '--cool-urls',
+    '--o', 'ox',
+    '--file=foo.js',
+    '-z', 'zappa', 'zip', 'zoo'
+  ])
   t.equal(actual.say, true)
-  t.equal(actual.a, 'ant')
+  t.equal(actual.a, 'ape')
   t.equal(actual.b && actual.d, true)
   t.equal(actual.coolUrls, true)
-  t.equal(actual.file, 'x.js')
-  t.equal(actual.z, 'zappa zebra zoo')
+  t.equal(actual.o, 'ox')
+  t.equal(actual.file, 'foo.js')
+  t.equal(actual.z, 'zappa zip zoo')
+  t.end()
+})
+
+test('The miscellaneous examples in the documentation work as illustrated.', t => {
+  const demoArray = [
+    'whatever',
+    '-w', 'squarewave',
+    '--source', 'src/md',
+    '--show-warnings', 'false',
+    '-rmx'
+  ]
+  const { whatever, w, source, showWarnings, r, m, x } = manchego(demoArray)
+  t.equal(whatever, true)
+  t.equal(w, 'squarewave')
+  t.equal(source, 'src/md')
+  t.equal(showWarnings, 'false')
+  t.equal(r, true)
+  t.equal(m, true)
+  t.equal(x, true)
   t.end()
 })
