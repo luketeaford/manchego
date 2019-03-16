@@ -11,14 +11,13 @@ Cheesy CLI
 
 Manchego is a tool for making Command Line Interfaces. It uses simple rules instead of making up a syntax with special characters. It has no defaults or side effects. It always returns an object.
 
-## What it does
-- [x] Words preceeding single- or double-hyphen options are set to true
-- [x] Single-hyphen options expect space separated values
-- [x] Single-hyphen options can be combined
+## What it Does
+- [x] Arguments preceeding single- or double-hyphen options are set to true
+- [x] Single- and double- hyphen options can receive space separated values
 - [x] Multiple arguments can be passed to the last single- or double-hyphen option
+- [x] Single-hyphen options can be combined
 - [x] Double-hyphen options are stored in camelCase
-- [x] Double-hyphen options can be separated by equals sign
-- [x] Double-hyphen options can receive a space separated value
+- [x] Double-hyphen options can receive an argument with an equals sign
 
 ## Usage Example
 ```console
