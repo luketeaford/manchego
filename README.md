@@ -19,47 +19,62 @@ Manchego is a tool for making Command Line Interfaces. It uses simple rules inst
 - [x] Double-hyphen options are stored in camelCase
 - [x] Double-hyphen options can receive an argument with an equals sign
 
-## Usage Example
+## Usage Examples
+### Overview of All Rules
 ```console
 # If this is your input...
-node index.js say -a ape -bd --cool-urls --o ox --file=foo.js -z zap zip zoo
+node index.js say -a ape -bd --cool-urls --o ox --file=foo.js -z zappa zip zoo
 ```
 
 ```js
 // ...index.js will work like this
 const manchego = require('manchego')
 
+// Pass process.argv into the manchego function which returns an object
+const cli = manchego(process.argv)
+
 // Arguments preceding single- or double-hyphen options are set to true
-manchego.say // true
+cli.say // true
 
 // Single- and double- hyphen options can receive space separated values
-manchego.a // 'ape
-manchego.o // 'ox
+cli.a // 'ape
+cli.o // 'ox
 
 // Multiple arguments can be passed to the last single- or double- hyphen option
-manchego.z // 'zap zip zoo'
+cli.z // 'zappa zip zoo'
 
 // Single-hyphen options can be combined
-manchego.b // true
-manchego.d // true
+cli.b // true
+cli.d // true
 
 // Double-hyphen options are stored in camelCase
-manchego.coolUrls // true
+cli.coolUrls // true
 
 // Double-hyphen options can receive an argument with an equals sign
-manchego.file // 'foo.js'
+cli.file // 'foo.js'
+```
+
+### Miscellaneous Tips
+```console
+# If this is your input...
+node index.js whatever -w squarewave --source src/md --show-warnings false -rmx
 ```
 
 ```js
-// Simple destructuring
-const { say, a, b, c, d, file, z } = manchego(process.argv)
-console.log(say) // true
-console.log(a) // 'ape'
-console.log(b && d) // true
-console.log(coolUrls) // true
-console.log(file) // 'foo.js'
-console.log(z) // 'zap zip zoo'
-```
+// ...index.js will work like this
+const manchego = require('manchego')
 
-## Tips
-Manchego organizes the data from `process.argv` into a simple format so you can process it how you like.
+// Destructure the object manchego returns for ease of use
+const { whatever, w, source, showWarnings, r, m, x } = manchego(process.argv)
+whatever && r && m && x// true
+w // 'squarewave'
+source // 'src/md'
+
+// Sometimes it's useful to set an option true by default
+// Remember Manchego does not convert any value ('false' string instead of boolean)...
+showWarnings // 'false'
+
+// ...but it's trivial to do that in your code like so
+const showWarningsEnabled = showWarnings !== 'false' // false
+
+```
