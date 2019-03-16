@@ -14,7 +14,7 @@ Manchego is a tool for making Command Line Interfaces. It uses simple rules inst
 ## What it Does
 - [x] Arguments preceeding single- or double-hyphen options are set to true
 - [x] Single- and double- hyphen options can receive space separated values
-- [x] Multiple arguments can be passed to the last single- or double-hyphen option
+- [x] Multiple arguments can be passed to the last single- or double- hyphen option
 - [x] Single-hyphen options can be combined
 - [x] Double-hyphen options are stored in camelCase
 - [x] Double-hyphen options can receive an argument with an equals sign
@@ -41,8 +41,6 @@ console.log(z) // 'zappa zebra zoo'
 
 ## Tips
 Manchego organizes the data from `process.argv` into a simple format so you can process it how you like.
-
-Words that precede a dash command (a string beginning with `-` or `--`) will be set to `true`. This enables the CLI to be used to support multiple functions.
 
 ## Roadmap to 1.0.0
 - [ ] Show usage examples in small chunks
