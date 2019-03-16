@@ -90,32 +90,32 @@ test('Variadic arguments can be passed to the first single letter option of the 
   t.end()
 })
 
-test('An option beginning with two hyphens is set to true if it does not contain an equals sign.', t => {
+test('An option beginning with a double-hyphen is set to true if it does not contain an equals sign.', t => {
   const actual = manchego(['--ears'])
   t.equal(actual.ears, true)
   t.end()
 })
 
-test('An option beginning with two hyphens and separated with other hyphens will be stored in camelCase.', t => {
+test('An option beginning with a double-hyphen and separated with other hyphens will be stored in camelCase.', t => {
   const actual = manchego(['--the-velvet-underground'])
   t.equal(actual.theVelvetUnderground, true)
   t.end()
 })
 
-test('An option beginning with two hyphens that does not contain an equals sign is set to the argument that follows it.', t => {
+test('An option beginning with a double-hyphen that does not contain an equals sign is set to the argument that follows it.', t => {
   const actual = manchego(['--stone', 'cold'])
   t.equal(actual.stone, 'cold')
   t.end()
 })
 
-test('An option beginning with two hyphens and containing an equals sign is set to the value following the equal sign.', t => {
+test('An option beginning with a double-hyphen and containing an equals sign is set to the value following the equal sign.', t => {
   const actual = manchego(['--calculator=solar powered', 'no'])
   t.equal(actual.calculator, 'solar powered')
   t.equal(actual.no, undefined)
   t.end()
 })
 
-test('The last option that begins with two dashes can accept variadic arguments.', t => {
+test('The last option that begins with a double-hyphen can accept variadic arguments.', t => {
   const actual = manchego(['--cat', 'nip', 'nap', 'burglar'])
   t.equal(actual.cat, 'nip nap burglar')
   t.equal(actual.nip, undefined)
@@ -133,7 +133,7 @@ test('Variadic arguments cannot be set to an option that contains an equals sign
   t.end()
 })
 
-test('Variadic arguments can be passed to the last option that begins with two dashes.', t => {
+test('Variadic arguments can be passed to the last option that begins with a double-hyphen.', t => {
   const actual = manchego(['--kitten', '--cat', 'nip', 'nap', 'burglar'])
   t.equal(actual.kitten, true)
   t.equal(actual.cat, 'nip nap burglar')
@@ -143,28 +143,28 @@ test('Variadic arguments can be passed to the last option that begins with two d
   t.end()
 })
 
-test('Options beginning with two hyphens are set to true if they do not have an argument.', t => {
+test('Options beginning with a double-hyphen are set to true if they do not have an argument.', t => {
   const actual = manchego(['--air-guitar', '--synth'])
   t.equal(actual.airGuitar, true)
   t.equal(actual.synth, true)
   t.end()
 })
 
-test('Options beginning with two hyphens are set to the values of the arguments supplied by spaces.', t => {
+test('Options beginning with a double-hyphen are set to the values of the arguments supplied by spaces.', t => {
   const actual = manchego(['--sausage', 'bratwurst', '--pasta', 'ravioli'])
   t.equal(actual.sausage, 'bratwurst')
   t.equal(actual.pasta, 'ravioli')
   t.end()
 })
 
-test('Options beginning with two hyphens and containing an equals sign are set to the values to the right of the equals sign.', t => {
+test('Options beginning with a double-hyphen and containing an equals sign are set to the values to the right of the equals sign.', t => {
   const actual = manchego(['--candy-bar=chocolate', '--arf=dog-sound'])
   t.equal(actual.candyBar, 'chocolate')
   t.equal(actual.arf, 'dog-sound')
   t.end()
 })
 
-test('When a mix of single and double dash options is supplied and there are variadic arguments, they are applied to the last option.', t => {
+test('When a mix of single- and double-hyphen options is supplied and there are variadic arguments, they are applied to the last option.', t => {
   const setA = manchego(['-m', '--marx-bros', 'groucho', 'chico', 'harpo'])
   t.equal(setA.m, true)
   t.equal(setA.marxBros, 'groucho chico harpo')
