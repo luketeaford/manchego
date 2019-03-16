@@ -1,3 +1,6 @@
+## 0.9.3
+- Code clean up
+
 ## 0.9.2
 - Remove cruft from package
 
