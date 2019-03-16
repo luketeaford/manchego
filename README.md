@@ -44,4 +44,3 @@ Manchego organizes the data from `process.argv` into a simple format so you can 
 
 ## Roadmap to 1.0.0
 - [ ] Show usage examples in small chunks
-- [ ] Remove reference to dashes in code

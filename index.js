@@ -1,9 +1,9 @@
-const hasDashes = require('./lib/hasDashes')
-const hasZeroDashes = require('./lib/hasZeroDashes')
+const hasHyphens = require('./lib/hasHyphens')
+const hasZeroHyphens = require('./lib/hasZeroHyphens')
 const makeParser = require('./lib/makeParser')
 
-const hasOneDash = x => x.startsWith('-') && !x.startsWith('--')
-const hasTwoDashes = x => x.startsWith('--')
+const hasOneHyphen = x => x.startsWith('-') && !x.startsWith('--')
+const hasTwoHyphens = x => x.startsWith('--')
 
 const manchego = argv => {
   if (!(argv && argv.slice)) return {}
@@ -12,12 +12,12 @@ const manchego = argv => {
   const output = {}
   const addToOutput = (key, value) => Object.assign(output, { [key]: value })
 
-  const dashParser = makeParser(arr, addToOutput)
-  const dashArr = arr.filter(hasDashes)
+  const parse = makeParser(arr, addToOutput)
+  const hyphenArray = arr.filter(hasHyphens)
 
-  arr.filter(hasZeroDashes).forEach(dashParser())
-  dashArr.filter(hasOneDash).forEach(dashParser('-'))
-  dashArr.filter(hasTwoDashes).forEach(dashParser('--'))
+  arr.filter(hasZeroHyphens).forEach(parse())
+  hyphenArray.filter(hasOneHyphen).forEach(parse('-'))
+  hyphenArray.filter(hasTwoHyphens).forEach(parse('--'))
 
   return output
 }
