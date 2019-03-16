@@ -66,12 +66,12 @@ const manchego = require('manchego')
 
 // Destructure the object manchego returns for ease of use
 const { whatever, w, source, showWarnings, r, m, x } = manchego(process.argv)
-whatever && r && m && x// true
+whatever && r && m && x // true
 w // 'squarewave'
 source // 'src/md'
 
 // Sometimes it's useful to set an option true by default
-// Remember Manchego does not convert any value ('false' string instead of boolean)...
+// Remember manchego does not convert any value ('false' string instead of boolean)...
 showWarnings // 'false'
 
 // ...but it's trivial to do that in your code like so
