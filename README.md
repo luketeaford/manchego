@@ -47,5 +47,3 @@ Words that precede a dash command (a string beginning with `-` or `--`) will be 
 
 ## Roadmap to 1.0.0
 - [ ] Show usage examples in small chunks
-- [ ] AddToOutput vs AssignToOutput (assign is probably better)
-- [ ] Solve suspicious similarity with variadic args for single and double hyphen options
