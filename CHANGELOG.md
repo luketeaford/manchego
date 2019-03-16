@@ -1,3 +1,6 @@
+## 0.9.4
+- Documentation improvements
+
 ## 0.9.3
 - Code clean up
 
