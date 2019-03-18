@@ -38,8 +38,8 @@ const cli = manchego(process.argv)
 cli.say // true
 
 // Single- and double- hyphen options can receive space separated values
-cli.a // 'ape
-cli.o // 'ox
+cli.a // 'ape'
+cli.o // 'ox'
 
 // Multiple arguments can be passed to the last single- or double- hyphen option
 cli.z // 'zappa zip zoo'
@@ -79,6 +79,3 @@ showWarnings // 'false'
 const showWarningsEnabled = showWarnings !== 'false' // false
 
 ```
-
-## Roadmap
-- [ ] Investigate plugins
