@@ -1,9 +1,7 @@
-<img alt="" src="manchego-logo.png">
-
 # Manchego
 [![Build Status](https://travis-ci.com/luketeaford/manchego.svg?branch=master)](https://travis-ci.com/luketeaford/manchego)
-
-Cheesy CLI
+[![Coverage Status](https://coveralls.io/repos/github/luketeaford/manchego/badge.svg)](https://coveralls.io/github/luketeaford/manchego)
+<img alt="" src="manchego-logo.png">
 
 ## Design Goals
 - [x] No made-up syntax
