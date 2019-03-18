@@ -78,3 +78,6 @@ showWarnings // 'false'
 const showWarningsEnabled = showWarnings !== 'false' // false
 
 ```
+
+## Roadmap
+- [ ] Investigate plugins
