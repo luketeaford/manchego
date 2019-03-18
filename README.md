@@ -1,6 +1,8 @@
 <img alt="" src="manchego-logo.png">
 
 # Manchego
+[![Build Status](https://travis-ci.com/luketeaford/manchego.svg?branch=master)](https://travis-ci.com/luketeaford/manchego)
+
 Cheesy CLI
 
 ## Design Goals
