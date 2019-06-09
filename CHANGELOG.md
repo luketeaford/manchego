@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2
+- Use MIT license
+
 ## 1.0.1
 - Fix typo in README documentation
 
