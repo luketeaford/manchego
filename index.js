@@ -1,3 +1,5 @@
+const compose = require('./lib/compose')
+const convertBooleans = require('./lib/convertBooleans')
 const hasHyphens = require('./lib/hasHyphens')
 const hasZeroHyphens = require('./lib/hasZeroHyphens')
 const makeParser = require('./lib/makeParser')
@@ -23,3 +25,4 @@ const manchego = argv => {
 }
 
 module.exports = manchego
+module.exports.convertBooleans = compose(convertBooleans, manchego)

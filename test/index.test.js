@@ -1,5 +1,6 @@
 const test = require('tape')
 const actualManchego = require('../index')
+const actualConvertBooleans = require('../index').convertBooleans
 
 test('Manchego returns an object when called without an argument.', t => {
   const actual = actualManchego()
@@ -17,6 +18,7 @@ test('Manchego expects to receive process.argv, an array, so it ignores the firs
 
 // Mimic process.argv by adding two args to simplify test data
 const manchego = arr => actualManchego(['x', 'x', ...arr])
+const convertBooleans = arr => actualConvertBooleans(['x', 'x', ...arr])
 
 test('Manchego stores arguments to options as strings.', t => {
   const actual = manchego(['-a', 'true', '-b', 'false', '--c=0', '--d=false'])
@@ -215,6 +217,30 @@ test('The miscellaneous examples in the documentation work as illustrated.', t =
   t.equal(w, 'squarewave')
   t.equal(source, 'src/md')
   t.equal(showWarnings, 'false')
+  t.equal(r, true)
+  t.equal(m, true)
+  t.equal(x, true)
+  t.end()
+})
+
+test('Manchego provides a convertBooleans function which converts the strings "true" and "false" to their respective Boolean values.', t => {
+  const demoArray = [
+    'whatever',
+    '-w', 'squarewave',
+    '--convert-true', 'true',
+    '--convert-false', 'false',
+    '--source', 'src/md',
+    '--show-warnings', 'false',
+    '-rmx'
+  ]
+  const { whatever, w, convertTrue, convertFalse, source, showWarnings, r, m, x } = convertBooleans(demoArray)
+
+  t.equal(whatever, true)
+  t.equal(w, 'squarewave')
+  t.equal(convertTrue, true)
+  t.equal(convertFalse, false)
+  t.equal(source, 'src/md')
+  t.equal(showWarnings, false)
   t.equal(r, true)
   t.equal(m, true)
   t.equal(x, true)
