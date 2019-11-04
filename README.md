@@ -5,11 +5,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/luketeaford/manchego/badge.svg)](https://coveralls.io/github/luketeaford/manchego)
 
 ## Design Goals
-- [x] No made-up syntax
-- [x] No defaults or side effects
-- [x] No dependencies
-- [x] Always return an object
-
 Manchego is a tool for making Command Line Interfaces. It uses simple rules instead of making up a syntax with special characters. It has no defaults or side effects. It always returns an object.
 
 ## What it Does
@@ -55,6 +50,22 @@ cli.coolUrls // true
 cli.file // 'foo.js'
 ```
 
+### Converting 'True' and 'False' to Booleans
+In v1.1.0, Manchego adds a convertBooleans option:
+```console
+# If this is your input...
+node index.js whatever --show-warnings false --have-fun true
+```
+```js
+// ... You can use convertBooleans from manchego
+const manchego = require('manchego').convertBooleans
+
+// Destructure the object for ease of use
+const { showWarnings, haveFun } = manchego(process.argv)
+showWarnings // false
+haveFun // true
+```
+
 ### Miscellaneous Tips
 ```console
 # If this is your input...
@@ -77,5 +88,4 @@ showWarnings // 'false'
 
 // ...but it's trivial to do that in your code like so
 const showWarningsEnabled = showWarnings !== 'false' // false
-
 ```

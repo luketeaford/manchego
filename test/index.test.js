@@ -226,23 +226,14 @@ test('The miscellaneous examples in the documentation work as illustrated.', t =
 test('Manchego provides a convertBooleans function which converts the strings "true" and "false" to their respective Boolean values.', t => {
   const demoArray = [
     'whatever',
-    '-w', 'squarewave',
     '--convert-true', 'true',
-    '--convert-false', 'false',
-    '--source', 'src/md',
-    '--show-warnings', 'false',
-    '-rmx'
+    '--convert-false', 'false'
   ]
-  const { whatever, w, convertTrue, convertFalse, source, showWarnings, r, m, x } = convertBooleans(demoArray)
+
+  const { whatever, convertTrue, convertFalse } = convertBooleans(demoArray)
 
   t.equal(whatever, true)
-  t.equal(w, 'squarewave')
   t.equal(convertTrue, true)
   t.equal(convertFalse, false)
-  t.equal(source, 'src/md')
-  t.equal(showWarnings, false)
-  t.equal(r, true)
-  t.equal(m, true)
-  t.equal(x, true)
   t.end()
 })
