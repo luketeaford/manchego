@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+- Provide a convertBooleans option
+
 ## 1.0.2
 - Use MIT license
 
