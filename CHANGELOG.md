@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.1
+- Update devDependencies
+
 ## 1.1.0
 - Provide a convertBooleans option
 
