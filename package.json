@@ -39,10 +39,10 @@
   },
   "homepage": "https://github.com/luketeaford/manchego#readme",
   "devDependencies": {
-    "coveralls": "^3.1.0",
+    "coveralls": "^3.1.1",
     "nyc": "^15.1.0",
     "standard": "^16.0.4",
-    "tap-spec": "^5.0.0",
-    "tape": "^5.0.1"
+    "tap-spec": "^2.2.2",
+    "tape": "^5.5.2"
   }
 }
